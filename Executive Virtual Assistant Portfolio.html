@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greemald Joven - Executive Virtual Assistant</title>
+    <style>
+        :root {
+            --color-primary: #2160508d;
+            --color-secondary: #32B8C6;
+            --color-accent: #E6815F;
+            --color-dark: #1F2121;
+            --color-light: #FCFCF9;
+            --color-text: #134252;
+            --color-border: #C1A89A;
+            --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --spacing-sm: 12px;
+            --spacing-md: 20px;
+            --spacing-lg: 32px;
+            --spacing-xl: 48px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--color-light);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--color-primary) 0%, #2166B8 100%);
+            color: white;
+            padding: var(--spacing-xl) var(--spacing-md);
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: var(--spacing-sm);
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-lg);
+            flex-wrap: wrap;
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .contact-info a:hover {
+            opacity: 0.7;
+        }
+
+        nav {
+            background: white;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-bottom: 2px solid var(--color-border);
+            position: sticky;
+            top: 150px;
+            z-index: 99;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-lg);
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s, border-bottom 0.3s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        nav a:hover {
+            color: var(--color-secondary);
+            border-bottom-color: var(--color-secondary);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-xl) var(--spacing-md);
+        }
+
+        section {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        h2 {
+            font-size: 2em;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 3px solid var(--color-secondary);
+            display: inline-block;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: var(--spacing-md);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid var(--color-secondary);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h3 {
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.3em;
+        }
+
+        .card p {
+            margin-bottom: var(--spacing-sm);
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #E6815F20;
+            color: var(--color-accent);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+            margin-right: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .highlight {
+            background-color: #32B8C620;
+            padding: var(--spacing-md);
+            border-left: 4px solid var(--color-secondary);
+            border-radius: 4px;
+            margin: var(--spacing-lg) 0;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            padding: var(--spacing-lg);
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-box .number {
+            font-size: 2.5em;
+            font-weight: 700;
+            display: block;
+        }
+
+        .stat-box .label {
+            font-size: 0.9em;
+            opacity: 0.95;
+        }
+
+        ul {
+            margin-left: var(--spacing-lg);
+            margin-top: var(--spacing-md);
+        }
+
+        li {
+            margin-bottom: var(--spacing-sm);
+            color: #555;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .skill-category {
+            background: white;
+            padding: var(--spacing-md);
+            border-radius: 8px;
+            border-top: 3px solid var(--color-accent);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        }
+
+        .skill-category h4 {
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.1em;
+        }
+
+        .skill-category ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .skill-category li {
+            padding: 4px 0;
+            font-size: 0.95em;
+        }
+
+        .skill-category li:before {
+            content: "✓ ";
+            color: var(--color-secondary);
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        footer {
+            background-color: var(--color-dark);
+            color: white;
+            text-align: center;
+            padding: var(--spacing-lg) var(--spacing-md);
+            margin-top: var(--spacing-xl);
+            font-size: 0.9em;
+        }
+
+        .timeline {
+            margin: var(--spacing-lg) 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            padding-left: var(--spacing-lg);
+        }
+
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background-color: var(--color-secondary);
+            border-radius: 50%;
+            margin-top: 6px;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--color-secondary);
+        }
+
+        .timeline-item:not(:last-child):after {
+            content: "";
+            position: absolute;
+            left: 5px;
+            top: 25px;
+            width: 2px;
+            height: calc(100% + 24px);
+            background-color: var(--color-border);
+        }
+
+        .timeline-content {
+            background: white;
+            padding: var(--spacing-md);
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+            flex-grow: 1;
+        }
+
+        .timeline-content h4 {
+            color: var(--color-primary);
+            margin-bottom: 4px;
+        }
+
+        .timeline-content .date {
+            color: var(--color-secondary);
+            font-size: 0.9em;
+            font-weight: 500;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .timeline-content .role {
+            color: var(--color-accent);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: var(--spacing-md);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            nav ul {
+                gap: var(--spacing-md);
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-info {
+                gap: var(--spacing-md);
+                flex-direction: column;
+            }
+
+            main {
+                padding: var(--spacing-lg) var(--spacing-sm);
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Greemald Joven</h1>
+        <p>Executive Virtual Assistant &amp; Operations Specialist</p>
+        <div class="contact-info">
+            <span>📧 greemald.joven@icloud.com</span>
+            <span>📞 +63 945 256 8430</span>
+            <span>📍 Batangas, Philippines</span>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#expertise">Expertise</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Overview Section -->
+        <section id="overview">
+            <h2>Professional Overview</h2>
+            <div class="highlight">
+                <p><strong>Experienced Executive Virtual Assistant</strong> with 2+ years of proven expertise in managing complex administrative operations, leading high-performance teams, and driving business growth through strategic lead generation and e-commerce optimization.</p>
+            </div>
+
+            <div class="stats">
+                <div class="stat-box">
+                    <span class="number">2+</span>
+                    <span class="label">Years in EVA Role</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">5+</span>
+                    <span class="label">Years Professional Experience</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">Team</span>
+                    <span class="label">Leadership Experience</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">Multi-Platform</span>
+                    <span class="label">Operations Expertise</span>
+                </div>
+            </div>
+
+            <h3 style="margin-top: var(--spacing-lg); color: var(--color-primary); font-size: 1.3em;">Core Strengths</h3>
+            <ul style="margin-top: var(--spacing-md);">
+                <li><strong>Administrative Excellence:</strong> Mastered email management, calendar coordination, and appointment scheduling for optimal workflow efficiency</li>
+                <li><strong>Team Leadership:</strong> Led prospecting and lead generation teams, driving business growth through targeted strategies</li>
+                <li><strong>E-Commerce Operations:</strong> Hands-on experience supporting operational growth and customer satisfaction across multiple platforms</li>
+                <li><strong>Social Media Strategy:</strong> Skilled in LinkedIn outreach and targeted engagement for lead generation and client network expansion</li>
+                <li><strong>Problem-Solving:</strong> Proactive approach to identifying and resolving operational challenges with analytical precision</li>
+            </ul>
+        </section>
+
+        <!-- Expertise Section -->
+        <section id="expertise">
+            <h2>Key Expertise Areas</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>📋 Administrative Management</h3>
+                    <p>Email &amp; Calendar Management • Appointment Coordination • Schedule Optimization • Document Organization • Task Prioritization</p>
+                </div>
+                <div class="card">
+                    <h3>👥 Lead Generation &amp; Outreach</h3>
+                    <p>LinkedIn Prospecting • Targeted Outreach Campaigns • Lead Conversion • Network Expansion • Client Engagement Strategies</p>
+                </div>
+                <div class="card">
+                    <h3>🛒 E-Commerce Operations</h3>
+                    <p>Multi-Platform Management • Customer Service Excellence • Operations Support • Inventory Coordination • Sales Assistance</p>
+                </div>
+                <div class="card">
+                    <h3>💼 Customer Service</h3>
+                    <p>Client Communication • Issue Resolution • Customer Support • Service Quality • Relationship Management</p>
+                </div>
+                <div class="card">
+                    <h3>📊 Data &amp; Finance</h3>
+                    <p>QuickBooks Pro • Bookkeeping (NCIII Certified) • Financial Documentation • Data Entry • Financial Reporting</p>
+                </div>
+                <div class="card">
+                    <h3>🤝 Team Leadership</h3>
+                    <p>Team Coordination • Performance Management • Shift Coordination • Training Support • Collaborative Problem-Solving</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Timeline -->
+        <section id="experience">
+            <h2>Professional Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Executive Virtual Assistant - Lead Generation Specialist &amp; Prospecting Team Leader</h4>
+                        <span class="date">March 2023 - November 2025</span>
+                        <span class="role">The VA Group, LLC | Las Vegas, NV</span>
+                        <p>Led prospecting and lead generation initiatives, managing team operations and driving business growth through targeted LinkedIn outreach and social media strategies. Coordinated client communications, managed administrative priorities, and supported e-commerce operations with proven ability to multitask and solve problems proactively.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Senior Content Moderator</h4>
+                        <span class="date">March 2022 - September 2023</span>
+                        <span class="role">LizardBear Tasking Inc. (TaskUs) | Batangas, Philippines</span>
+                        <p>Managed content moderation responsibilities while demonstrating adaptability in a rotational shift environment. Developed strong attention to detail and communication skills through high-volume task management and team collaboration.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Advanced Technical Support Specialist</h4>
+                        <span class="date">October 2021 - February 2022</span>
+                        <span class="role">Concentrix Philippines | Quezon City, Metro Manila</span>
+                        <p>Provided technical support with strong problem-solving abilities and analytical skills. Gained experience in issue resolution and maintaining operational effectiveness in fast-paced environments.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Customer Service Representative</h4>
+                        <span class="date">February 2021 - September 2021</span>
+                        <span class="role">Alorica Philippines | Batangas City</span>
+                        <p>Delivered excellent customer service with strong communication and interpersonal skills. Demonstrated ability to maintain professionalism and handle customer interactions confidently.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Administrative Aide III</h4>
+                        <span class="date">August 2019 - March 2020</span>
+                        <span class="role">LGU Lobo - Municipality of Lobo | Batangas, Philippines</span>
+                        <p>Supported municipal administrative operations with document processing, record management, and office coordination. Foundation in government administrative procedures and professional conduct.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2>Professional Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>📱 Digital Tools &amp; Platforms</h4>
+                    <ul>
+                        <li>Google Workspace (Docs, Sheets, Calendar)</li>
+                        <li>Microsoft Office Suite</li>
+                        <li>Email Management Systems</li>
+                        <li>CRM Platforms</li>
+                        <li>Communication Tools</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4>💰 Financial &amp; Accounting</h4>
+                    <ul>
+                        <li>QuickBooks Pro (Certified)</li>
+                        <li>Basic Bookkeeping (NCIII)</li>
+                        <li>Financial Documentation</li>
+                        <li>Data Entry &amp; Verification</li>
+                        <li>Financial Reporting</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4>🎯 Core Competencies</h4>
+                    <ul>
+                        <li>Multitasking &amp; Prioritization</li>
+                        <li>Problem-Solving</li>
+                        <li>Communication (Verbal/Written)</li>
+                        <li>Professionalism &amp; Integrity</li>
+                        <li>Confidentiality Management</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4>🌐 Business Operations</h4>
+                    <ul>
+                        <li>Lead Generation &amp; Prospecting</li>
+                        <li>LinkedIn Outreach</li>
+                        <li>E-Commerce Support</li>
+                        <li>Customer Service</li>
+                        <li>Team Coordination</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications">
+            <h2>Professional Certifications &amp; Education</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>🏆 Certifications</h3>
+                    <ul style="list-style: none; margin-left: 0;">
+                        <li><strong>✓ Intuit QuickBooks Certified</strong><br><span style="font-size: 0.9em; color: #666;">QuickBooks Level 1 Pro Advisor</span></li>
+                        <li><strong>✓ Bookkeeping NCIII Certified</strong><br><span style="font-size: 0.9em; color: #666;">TESDA - Currently Enrolled in Advanced Course</span></li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>🎓 Education</h3>
+                    <ul style="list-style: none; margin-left: 0;">
+                        <li><strong>Bachelor of Public Administration</strong><br><span style="font-size: 0.9em; color: #666;">Batangas State University</span></li>
+                        <li><strong>Senior High School Diploma</strong><br><span style="font-size: 0.9em; color: #666;">Lobo Institute Inc., 2019</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight" style="margin-top: var(--spacing-lg);">
+                <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-md);">Professional Development Focus</h3>
+                <p>Continuously expanding expertise in bookkeeping and financial operations. Currently pursuing advanced TESDA Bookkeeping certification (NCIII) to complement QuickBooks Pro Advisor status, enabling comprehensive financial management support for clients.</p>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section style="text-align: center; margin: var(--spacing-xl) 0;">
+            <h2 style="border-bottom: none; display: block;">Ready to Optimize Your Operations?</h2>
+            <p style="font-size: 1.1em; color: #555; margin: var(--spacing-md) 0;">Let's connect and discuss how I can streamline your administrative processes and drive operational excellence.</p>
+            <a href="mailto:greemald.joven@icloud.com" class="cta-button">📧 Get In Touch</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Greemald Joven. Executive Virtual Assistant | All Rights Reserved</p>
+        <p style="margin-top: var(--spacing-sm); font-size: 0.85em; opacity: 0.8;">Batangas, Philippines | Available for Remote Opportunities</p>
+    </footer>
+</body>
+</html>
